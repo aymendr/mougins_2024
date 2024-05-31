@@ -14,4 +14,8 @@
 - or sudo apt install maven
 - Move maven folder to /opt
 - clone projet with git : git clone https://github.com/aymendr/vprofile-project
+
+## Jenkins
+### Installation
+- link : https://www.jenkins.io/doc/book/installing/
 - 
