@@ -43,3 +43,6 @@
 - In Jenkins --> Manage Jenkins --> System --> SonarQube installations --> Give a name, Server URL, and Server authentication token (secret text corresponding to sonarqube token created)
 - In Jenkins --> Manage Jenkins --> Tools --> SonarQube Scanner installations --> set install automatically
 - Configure sonarqube Plugin within maven project : https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner-for-maven/
+
+## Integration of tools within Jenkins
+- Install **pipeline maven integration** et **Pipepline Utility Steps** plugins
