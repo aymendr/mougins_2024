@@ -18,4 +18,9 @@
 ## Jenkins
 ### Installation
 - link : https://www.jenkins.io/doc/book/installing/
-- 
+
+## Nexus
+### Installation
+- Download sonatype nexus artifactory: https://help.sonatype.com/en/download-archives---repository-manager-3.html
+- Installation : https://help.sonatype.com/en/installation-methods.html
+- Extract folder and navigate to <sonatype>/bin/<distribution>. Start nexus server : nexus.exe /run
