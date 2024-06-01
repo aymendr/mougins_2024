@@ -44,6 +44,7 @@
 - In Jenkins --> Manage Jenkins --> Tools --> SonarQube Scanner installations --> set install automatically
 - Configure sonarqube Plugin within maven project : https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner-for-maven/
 - Configure sonarqube stage within Jenkins pipeline : https://docs.sonarsource.com/sonarqube/9.8/analyzing-source-code/scanners/jenkins-extension-sonarqube/#jenkins-pipeline
+
 ´´´
         stage('SonarQube analysis') {
             def scannerHome = tool 'sonarscanner'; // Voir configuration au niveau de Manage jenkins --> Tools 
