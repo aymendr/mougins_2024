@@ -36,6 +36,12 @@
 - On other operating systems, as a non-root user execute: ```/opt/sonarqube/bin/<OS>/sonar.sh console```
 - Follow server logs with the command ``` tail -f <sonar-folder>/logs/sonar.log ```
 - For more details about managing sonarqube service see documentation : https://docs.sonarsource.com/sonarqube/latest/setup-and-upgrade/configure-and-operate-a-server/operating-the-server/
+- On Linux machines, open port 9000 to connect to sonarqube interface:
+### Open port 9000 on Centos
+- Add port to firewalld rules : ```sudo firewall-cmd --zone=public --add-port=9000/tcp --permanent```
+- Reload rules : ```sudo firewall-cmd --reload```
+
+### Sonarqube Jenkins Configuration
 - On Jenkins install **SonarQube Scanner** plugin
 - access sonarqube server on **localhost:9000** with admin/admin credentials
 - change default password once logged in
