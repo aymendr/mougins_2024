@@ -46,10 +46,21 @@
 - Configure sonarqube stage within Jenkins pipeline : https://docs.sonarsource.com/sonarqube/9.8/analyzing-source-code/scanners/jenkins-extension-sonarqube/#jenkins-pipeline
 
 ```
-        stage('SonarQube analysis') {
-            def scannerHome = tool 'sonarscanner'; // Voir configuration au niveau de Manage jenkins --> Tools 
-            withSonarQubeEnv('sonarqube') { // If you have configured more than one global server connection, you can specify its name
-              sh "${scannerHome}/bin/sonar-scanner"
+        stage('Sonar Analysis') {
+            environment {
+                scannerHome = tool 'sonar4.7'
+            }
+            steps {
+               withSonarQubeEnv('sonar') {
+                   sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
+                   -Dsonar.projectName=vprofile \
+                   -Dsonar.projectVersion=1.0 \
+                   -Dsonar.sources=src/ \
+                   -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+                   -Dsonar.junit.reportsPath=target/surefire-reports/ \
+                   -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+                   -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+              }
             }
         }
 ```
