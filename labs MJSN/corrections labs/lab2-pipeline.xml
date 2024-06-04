@@ -1,0 +1,68 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1400.v7fd111b_ec82f">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2184.v0b_358b_953e69"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2184.v0b_358b_953e69">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.jira.JiraProjectProperty plugin="jira@3.13">
+      <siteName>https://driraaymen.atlassian.net/</siteName>
+    </hudson.plugins.jira.JiraProjectProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@3883.vb_3ff2a_e3eea_f">
+    <script>pipeline {
+    agent any
+    tools{
+        maven &quot;maven3&quot;
+        jdk &quot;jdk-17&quot;
+    }
+    stages {
+        stage(&apos;Checkout&apos;) {
+            steps {
+                // Récupérer le code source
+                git branch: &apos;main&apos;, credentialsId: &apos;github_credentials&apos;, url: &apos;https://github.com/aymendr/maven_project.git&apos;
+            }
+        }
+        stage(&apos;Build&apos;) {
+            steps {
+                // Construire le projet avec Maven
+                sh &apos;mvn clean package&apos;
+            }
+        }
+        stage(&apos;Test&apos;) {
+            steps {
+                // Exécuter les tests unitaires
+                sh &apos;mvn test&apos;
+            }
+        }
+        stage(&apos;Deploy&apos;) {
+            steps {
+                // Déployer l&apos;application (simulé ici par un écho)
+                echo &apos;Déploiement de l\&apos;application...&apos;
+                // Ajoutez vos étapes de déploiement réelles ici
+            }
+        }
+    }
+
+    post {
+        success {
+            echo &apos;Le pipeline a réussi!&apos;
+        }
+        failure {
+            echo &apos;Le pipeline a échoué.&apos;
+        }
+    }
+}
+</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
