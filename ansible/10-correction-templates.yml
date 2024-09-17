@@ -1,0 +1,8 @@
+---
+- name: remplir motd avec host data
+  hosts: all
+  become: true
+  tasks:
+    - template:
+        src: motd-facts.j2
+        dest: /etc/motd

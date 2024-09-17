@@ -1,0 +1,39 @@
+---
+
+- name: Installation des packages
+  hosts: all
+  gather_facts: true
+  become: true
+  tasks:
+    - name: latest httpd is installed
+      yum:
+        name:
+          - httpd
+        state: latest
+
+    - name: Update indexes
+      copy:
+        content: "hello world"
+        dest: /var/www/html/index.html
+          #when: ansible_facts['hostname'] == "cible1"
+
+    - name: Ensure the default Apache port is 8080
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+          #insertafter: '^#Listen '
+        line: Listen 8080
+      notify: restart_httpd
+
+    - name: do permit traffic in default zone on port 80/tcp
+      firewalld:
+        port: 8080/tcp
+        permanent: true
+        state: enabled
+        immediate: yes
+
+  handlers:
+    - name: restart_httpd
+      service:
+        name: httpd
+        state: restarted
